@@ -1,0 +1,2 @@
+Django==2.1.7
+autopep8==1.4.3
