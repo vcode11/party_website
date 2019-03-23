@@ -3,9 +3,11 @@ from django.http import HttpResponse
 
 from .forms import MemberRegistrationForm
 
+app_name = 'party'
+
 def home(request):
     return render(request,'party/base.html',{})
-    
+
 def apply(request):
     if request.method == 'GET':
         form = MemberRegistrationForm()
