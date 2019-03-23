@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <title>Rashtriya Bandhuthva Party</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'base.css'%} ">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-default fixed-top">
+        <div class="container-fluid">
+            <img src="{%static 'cooker.jpg'%}" style="width:40px;height:40px;float: left;margin-right: 5%">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Rashtriya Bandhuthva Party</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Elections</a></li>
+                <li><a href="#">Media</a></li>
+                <li><a href="#"><button>Apply</button></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content-except-nav-foot">
+        <div class="news-ticker">
+            <div class="news-ticker-heading">Updates</div><div class="news-ticker-txt" ><marquee>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</marquee></div>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer>
+        <div id="footer_cols">
+        <div class="footer_col1">
+            <h1>
+                CONTACT US
+            </h1>
+            <p>Party Cordinator<br>
+                Mr. Amul Palekar
+            </p>
+            <p>+91XXXXXXXX</p>
+        </div>
+        <div class="footer_col2">
+            <div>
+                <a href="#">HOME</a>
+            </div>
+            <div>
+                <a href="#">MEDIA</a>
+            </div>
+            <div>
+                <a href="#">ABOUT US</a>
+            </div>
+            <div>
+                <a href="#">SIGN UP!</a>
+            </div>
+        </div>
+        </div>
+        <!-- social media hover effect  -->
+        <div id="footer_social_media_buttons">
+            <ul>
+                <li>
+                    <ahref="#">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span class="fa fa-facebook" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span class="fa fa-instagram" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span class="fa fa-google-plus" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span class="fa fa-linkedin" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span class="fa fa-twitter" aria-hidden="true"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+</html>
