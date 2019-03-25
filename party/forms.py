@@ -5,6 +5,8 @@ from django.core.validators import EmailValidator, RegexValidator
 from django.forms import CharField
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
+from .models import State, District
+from django_select2.forms import ModelSelect2Widget
 
 
 def validate_date(date):
@@ -61,3 +63,23 @@ class MemberRegistrationForm(forms.Form):
                                         ],
                                    )
                             
+    state = forms.ModelChoiceField(
+                                label = 'State',
+                                queryset=State.objects.all(),
+                                widget=ModelSelect2Widget(
+                                    model = State,
+                                    search_fields = ['name_icontains'],
+                                    dependent_fields={'district': 'districts'},
+
+                                ),
+                            )
+    district = forms.ModelChoiceField(
+                                        label = 'District',
+                                        queryset = District.objects.all(),
+                                        widget = ModelSelect2Widget(
+                                            model = District,
+                                            search_fields = ['name_icontains'],
+                                            dependent_fields = {'state':'parent_state'},
+                                            max_results = 500,
+                                        )
+                )

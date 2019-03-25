@@ -15,7 +15,7 @@ class District(models.Model):
         Model for districts in various states.
     """
     name = models.CharField(max_length=200)
-    parent_state = models.ForeignKey('State', on_delete=models.CASCADE)
+    parent_state = models.ForeignKey('State', on_delete=models.CASCADE, related_name='districts')
 
     def __str__(self):
         return self.name
