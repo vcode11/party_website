@@ -24,17 +24,18 @@ class Member(models.Model):
     """
         Model to store data of members of  party
     """
-    name = models.CharField(max_length=200),
-    dob  = models.DateField(blank=True,null=True),
-    gender = models.CharField(max_length=1,default='M'),
-    email = models.EmailField(blank=True),
-    phone = models.CharField(max_length=10),
-    state = models.CharField(max_length=50),
-    district = models.CharField(max_length=50,),
-    address = models.CharField(max_length=200,blank=True),
-    pincode = models.CharField(max_length=6,blank=True),
-    voterID = models.CharField(max_length=10,blank=True),
+    name = models.CharField(max_length=200)
+    dob  = models.DateField(blank=True,null=True)
+    gender = models.CharField(max_length=1,default='M')
+    email = models.EmailField(blank=True)
+    phone = models.CharField(max_length=10)
+    state = models.CharField(max_length=50)
+    district = models.CharField(max_length=50,)
+    address = models.CharField(max_length=200,blank=True)
+    pincode = models.CharField(max_length=6,blank=True)
+    voterID = models.CharField(max_length=10,blank=True)
 
-
+    def __str__(self):
+        return self.name + '(' + self.district + ')'
 
 

@@ -7,9 +7,15 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from .models import State, District
 from django_select2.forms import ModelSelect2Widget
-from django.forms.widgets import SelectDateWidget
 
-
+def validate_date(date):
+    """
+        Date validation for DOB and age above 18 years
+    """
+    if datetime.date.today() < date:
+        raise ValidationError(_('Date of birth can\'t be a future date'))
+    if datetime.date.today().year - date.year < 17:
+        raise ValidationError(_('You must be atleast 18 years old.')) 
 class MemberRegistrationForm(forms.Form):
     """
         Form for registration of members.
@@ -23,14 +29,12 @@ class MemberRegistrationForm(forms.Form):
                                  ],
                            )
 
-    years = (i for i in range(1900,datetime.datetime.today().year-17))
     dob = forms.DateField(
                             label = 'Date Of Birth', 
                             required = False, 
-                            widget = SelectDateWidget(
-                                years = years,
-                                empty_label=("Year", "Month", "Day"),
-                                ),
+                            validators=[validate_date],
+                            widget=forms.widgets.DateInput(attrs={'type': 'date'})
+                                
                         )
     
     gender = forms.ChoiceField(
