@@ -51,7 +51,7 @@ class MemberRegistrationForm(forms.Form):
     email = forms.EmailField(
                                 label='Email', 
                                 widget=forms.TextInput(
-                                attrs={'placeholder': 'user@email.com'},
+                                attrs={'placeholder': 'email@gmail.com'},
                                 ),
                             )
     phone_number = forms.CharField(
@@ -61,6 +61,9 @@ class MemberRegistrationForm(forms.Form):
                                             message='Enter your 10 digit mobile number.'
                                             )
                                         ],
+                                        widget=forms.TextInput(
+                                            attrs={'placeholder': '9876543210'},
+                                        ),
                                    )
                             
     state = forms.ModelChoiceField(
