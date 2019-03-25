@@ -18,9 +18,8 @@ def apply(request):
         form = MemberRegistrationForm(request.POST)
         if form.is_valid():
             print(form.cleaned_data['name'])
-            print(form.cleaned_data['dob'])
-            print(form.cleaned_data['email'])
         context = {
             'form':form,
+            'message':'Thank you for joining us and becoming part of our movement.'
         }
     return render(request,'party/apply.html',context)

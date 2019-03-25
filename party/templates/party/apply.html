@@ -1,8 +1,13 @@
 {% extends 'party/base.html' %}
 {% block content %}
-<form action="." method="POST">
+    {% if message %}
+    <div class="apply-message">
+        {{message}}
+    </div>
+    {% endif %}
+<form action="." method="POST" class="apply-form">
     {% csrf_token %}
     {{ form.as_p }}
-<input type="submit" name="Register" value="Register">
+<input type="submit" name="Register" value="Register" class="apply-submit">
 </form>
 {% endblock %}

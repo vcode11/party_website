@@ -7,14 +7,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from .models import State, District
 from django_select2.forms import ModelSelect2Widget
-
-
-def validate_date(date):
-    """
-        Function to validate if a date is not a future date.
-    """
-    if date > datetime.date.today():
-        raise ValidationError(_('Date of Birth can\'t be a future date.'))
+from django.forms.widgets import SelectDateWidget
 
 
 class MemberRegistrationForm(forms.Form):
@@ -22,18 +15,19 @@ class MemberRegistrationForm(forms.Form):
         Form for registration of members.
     """
     name = forms.CharField(label='Name',
-                           validators=[RegexValidator(regex=r'([A-Za-z]|\s)+', message='Invalid Characters in name')],
-                           widget=forms.TextInput(
-                               attrs={'placeholder': 'Name'}
-                            )
+                           validators=[
+                               RegexValidator(
+                                        regex=r'([A-Za-z]|\s)+',
+                                        message='Invalid Characters in name',
+                                        )
+                                 ],
                            )
 
-    years = (i for i in range(1900,datetime.datetime.today().year+1))
+    years = (i for i in range(1900,datetime.datetime.today().year-17))
     dob = forms.DateField(
                             label = 'Date Of Birth', 
-                            required = False,
-                            validators = [validate_date], 
-                            widget = forms.SelectDateWidget(
+                            required = False, 
+                            widget = SelectDateWidget(
                                 years = years,
                                 empty_label=("Year", "Month", "Day"),
                                 ),
@@ -50,9 +44,7 @@ class MemberRegistrationForm(forms.Form):
 
     email = forms.EmailField(
                                 label='Email', 
-                                widget=forms.TextInput(
-                                attrs={'placeholder': 'email@gmail.com'},
-                                ),
+                                required = False,
                             )
     phone_number = forms.CharField(
                                     label='Phone No.', 
@@ -61,9 +53,6 @@ class MemberRegistrationForm(forms.Form):
                                             message='Enter your 10 digit mobile number.'
                                             )
                                         ],
-                                        widget=forms.TextInput(
-                                            attrs={'placeholder': '9876543210'},
-                                        ),
                                    )
                             
     state = forms.ModelChoiceField(
@@ -86,3 +75,38 @@ class MemberRegistrationForm(forms.Form):
                                             max_results = 500,
                                         )
                 )
+    address = forms.CharField(
+                label = 'Address',
+                required = False,
+                max_length = 200,
+                widget=forms.Textarea,
+            )
+    pin_code = forms.CharField(
+                    label = 'Pin Code',
+                    required = False,
+                    validators=[
+                        RegexValidator(
+                            regex=r'\d{6}',
+                            message = 'Enter a valid pin code',
+                        )
+                    ]
+                )
+    voterId = forms.CharField(
+                    label = 'Voter ID',
+                    required = False,
+                    validators=[
+                                RegexValidator(
+                                                regex=r'[A-Z]{3}\d{7}',
+                                                message='Enter valid VOTER ID number.',
+                                        )
+                                ],
+                )
+    disclaimer = '''I am above 18 years , and not enrolled as a government employee.
+                    I am not a member of any other political party registered with the Election Commission of India.
+                    I am not a member with any organization whose views, policies or actions are in 
+                    conflict with the objective of the party. I have not been convicted of any offense 
+                    involving moral turpitude. I hereby consent to receiving any communication from the party either in writing, 
+                    electronically and/or in any audio-visual format via phone (including SMS/MMS), email and/or at my address.'''
+    Iagree = forms.BooleanField(
+                label= disclaimer,
+            )
